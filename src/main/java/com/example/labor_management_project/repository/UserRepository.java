@@ -1,0 +1,53 @@
+package com.example.labor_management_project.repository;
+
+import com.example.labor_management_project.dto.AttendanceDTO;
+import com.example.labor_management_project.dto.DailyJobDTO;
+import com.example.labor_management_project.dto.NamePasswordDTO;
+import com.example.labor_management_project.model.User;
+import com.example.labor_management_project.model.Attendance;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
+
+import java.util.List;
+
+@Repository
+public interface UserRepository extends JpaRepository<User, Integer> {
+
+    @Query("select user from User user")
+    List<User> findAllUsers();
+
+    @Query("select user from User user where jobRole.roleID = 2 OR jobRole.roleID=1" )
+    List<User> findAllSupervisors();
+
+    @Query("select user from User user where jobRole.roleID = 3" )
+    List<User> findAllLabors();
+
+
+    @Query("select user.name from User user")
+    List<?> findAllUserNames();
+
+    @Query("SELECT new com.example.labor_management_project.dto.NamePasswordDTO(user.employeeID, user.name) FROM User user")
+    List<NamePasswordDTO> findNameWithPassword();
+
+    @Query("SELECT new com.example.labor_management_project.dto.DailyJobDTO(u.employeeID, u.name, a.attID, a.dailyJob) " +
+            "FROM User u " +
+            "JOIN Attendance a ON u.employeeID = a.user.employeeID")
+    List<DailyJobDTO> findDailyJob();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+}
+
