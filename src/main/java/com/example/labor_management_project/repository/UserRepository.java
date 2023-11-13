@@ -10,6 +10,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Integer> {
@@ -38,6 +39,9 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 
 
 
+    // Create Login Repository
+        Optional<User> findOneByEmployeeIDAndPassword(int employeeID, String password);
+        User findByEmployeeID(int employeeID);
 
 
 

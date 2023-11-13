@@ -1,10 +1,8 @@
 package com.example.labor_management_project.controller;
 
-import com.example.labor_management_project.dto.AttendanceDTO;
-import com.example.labor_management_project.dto.DailyJobDTO;
-import com.example.labor_management_project.dto.NamePasswordDTO;
-import com.example.labor_management_project.dto.UserDTO;
+import com.example.labor_management_project.dto.*;
 import com.example.labor_management_project.model.User;
+import com.example.labor_management_project.resopnse.LoginResponse;
 import com.example.labor_management_project.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -95,6 +93,15 @@ public class UserController {
     @GetMapping("/labors")
     public List<User> findAllLabors(){
         return userService.getAllLabors();
+    }
+
+
+
+    //Create Login Controler
+    @PostMapping("/login")
+    public ResponseEntity<LoginResponse.LoginGenResponse> login (@RequestBody UserDTO loginDTO){
+//        return loginService.loginUserCondition(loginDTO);
+        return ResponseEntity.ok().body(userService.loginUserCondition(loginDTO));
     }
 
 
