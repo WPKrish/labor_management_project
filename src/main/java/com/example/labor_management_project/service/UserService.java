@@ -1,11 +1,9 @@
 package com.example.labor_management_project.service;
 
 import com.example.labor_management_project.dto.DailyJobDTO;
-//import com.example.labor_management_project.dto.LoginDTO;
 import com.example.labor_management_project.dto.NamePasswordDTO;
 import com.example.labor_management_project.dto.UserDTO;
 import com.example.labor_management_project.exception.UserNotFoundException;
-import com.example.labor_management_project.model.Attendance;
 import com.example.labor_management_project.model.JobRole;
 import com.example.labor_management_project.model.User;
 import com.example.labor_management_project.repository.*;
@@ -18,6 +16,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+
 
 @Service
 public class UserService {
@@ -44,6 +43,7 @@ public class UserService {
 
             User tempUser = new User();
             tempUser.setName(userDTO.getName());
+            tempUser.setUsername(userDTO.getUsername());
             //tempUser.setPassword(userDTO.getPassword()); //this is used to set password without security
             tempUser.setPassword(this.passwordEncoder.encode(userDTO.getPassword())); //this is used to set password with security
 //            tempUser.setPassword(this.passwordEncoder.encode("123")); //this is used to set password with security and without user working
@@ -79,6 +79,7 @@ public class UserService {
         int availableUserEmpNo = availableUser.getEmployeeID();
 
         availableUser.setEmployeeID(availableUserEmpNo);
+        availableUser.setUsername(userDTO.getUsername());
         availableUser.setName(userDTO.getName());
         //availableUser.setPassword(userDTO.getPassword());
         availableUser.setPassword(this.passwordEncoder.encode(userDTO.getPassword())); //this is used to set password with security
@@ -218,10 +219,14 @@ public class UserService {
 
         String msg = "";
         String inputPassword = loginDTO.getPassword();
-        int inputEmployeeID = loginDTO.getEmployeeID();
+//        int inputEmployeeID = loginDTO.getEmployeeID();
+        String inputUsername = loginDTO.getUsername();
+
+        System.out.println("Log1");
 
         // Check if the User exists
-        Optional<User> loginUser = userRepository.findById(loginDTO.getEmployeeID());
+        Optional<User> loginUser = userRepository.findByUsername(loginDTO.getUsername());
+        System.out.println("Log"+loginUser);
 
         if (loginUser.isEmpty()) {
 //            return new ResponseEntity<>("Requested User not exist", HttpStatus.NOT_FOUND);
@@ -238,7 +243,8 @@ public class UserService {
             boolean isPasswordRight = passwordEncoder.matches(inputPassword, encodedPassword);
 
             if (isPasswordRight) {
-                Optional<User> user = userRepository.findOneByEmployeeIDAndPassword(inputEmployeeID, encodedPassword);
+//                Optional<User> user = userRepository.findOneByEmployeeIDAndPassword(inputEmployeeID, encodedPassword);
+                Optional<User> user = userRepository.findOneByUsernameAndPassword(inputUsername, encodedPassword);
 
                 if (user.isPresent() && role.equals("Admin")) {
 //                    return new LoginResponse("Login Success as Admin", true);

@@ -32,5 +32,7 @@ public class UserDTO {
     private String emergencyPhoneNo;
     private String emergencyName;
 
+    private String username;
+
 }
 

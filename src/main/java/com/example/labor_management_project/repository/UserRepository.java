@@ -1,10 +1,8 @@
 package com.example.labor_management_project.repository;
 
-import com.example.labor_management_project.dto.AttendanceDTO;
 import com.example.labor_management_project.dto.DailyJobDTO;
 import com.example.labor_management_project.dto.NamePasswordDTO;
 import com.example.labor_management_project.model.User;
-import com.example.labor_management_project.model.Attendance;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -39,9 +37,16 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 
 
 
+//    // Create Login Repository
+//        Optional<User> findOneByEmployeeIDAndPassword(int employeeID, String password);
+//        User findByEmployeeID(int employeeID);
+
     // Create Login Repository
-        Optional<User> findOneByEmployeeIDAndPassword(int employeeID, String password);
-        User findByEmployeeID(int employeeID);
+    Optional<User> findOneByUsernameAndPassword(String username, String password);
+//    User findByUsername(String username);
+
+    Optional<User> findByUsername(String username);
+    User findByEmployeeID(int employeeID);
 
 
 

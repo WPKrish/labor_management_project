@@ -49,5 +49,7 @@ public class User {
     private String emergencyPhoneNo;
     private String emergencyName;
 
+    private String username;
+
 
 }

@@ -97,12 +97,25 @@ public class UserController {
 
 
 
-    //Create Login Controler
+    //Create Login Controller
     @PostMapping("/login")
     public ResponseEntity<LoginResponse.LoginGenResponse> login (@RequestBody UserDTO loginDTO){
 //        return loginService.loginUserCondition(loginDTO);
         return ResponseEntity.ok().body(userService.loginUserCondition(loginDTO));
     }
+
+
+
+    // Security part
+//    @PostMapping("/generateToken")
+//    public String authenticateAndGetToken(@RequestBody AuthRequest authRequest) {
+//        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authRequest.getUsername(), authRequest.getPassword()));
+//        if (authentication.isAuthenticated()) {
+//            return jwtService.generateToken(authRequest.getUsername());
+//        } else {
+//            throw new UsernameNotFoundException("invalid user request !");
+//        }
+//    }
 
 
 
