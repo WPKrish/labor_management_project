@@ -1,6 +1,5 @@
 package com.example.labor_management_project.controller;
 
-import com.example.labor_management_project.model.JobRole;
 import com.example.labor_management_project.model.Site;
 import com.example.labor_management_project.service.SiteService;
 import org.springframework.beans.factory.annotation.Autowired;

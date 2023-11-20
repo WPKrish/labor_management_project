@@ -56,16 +56,11 @@ public class UserController {
         return userService.updateUserPassword(userDTO);
     }
 
-//    @DeleteMapping("{employeeID}")
-//    public String deleteUserDetails(@PathVariable("employeeID") int employeeID){
-//        userService.deleteUser(employeeID);
-//        return "User Deleted successfully";
-//    }
+
     @DeleteMapping("{employeeID}")
     public ResponseEntity<String> deleteUserDetails(@PathVariable("employeeID") int employeeID) {
         return userService.deleteUser(employeeID);
     }
-
 
 
     // Using Query
@@ -94,7 +89,6 @@ public class UserController {
     public List<User> findAllLabors(){
         return userService.getAllLabors();
     }
-
 
 
     //Create Login Controller

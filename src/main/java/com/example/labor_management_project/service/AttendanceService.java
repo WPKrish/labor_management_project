@@ -3,7 +3,6 @@ package com.example.labor_management_project.service;
 import com.example.labor_management_project.dto.AttendanceDTO;
 import com.example.labor_management_project.exception.UserNotFoundException;
 import com.example.labor_management_project.model.Attendance;
-import com.example.labor_management_project.model.JobRole;
 import com.example.labor_management_project.model.User;
 import com.example.labor_management_project.repository.AttendanceRepository;
 import com.example.labor_management_project.repository.JobRoleRepository;
@@ -39,6 +38,10 @@ public class AttendanceService{
 
         if (checkEmployee.isEmpty()){
             return new ResponseEntity<>("Requested User not exist", HttpStatus.NOT_FOUND);
+        }
+
+        else if(checkEmployee.get().isActiveUser()==false){
+            return new ResponseEntity<>("This employee is not currently employed by the company at the moment", HttpStatus.NOT_FOUND);
         }
 
 

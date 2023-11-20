@@ -15,7 +15,6 @@ public class SiteService {
     @Autowired
     SiteRepository siteRepository;
 
-
     public String createSite(Site site) {
         siteRepository.save(site);
         return "Success";

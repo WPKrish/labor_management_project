@@ -1,12 +1,10 @@
 package com.example.labor_management_project.dto;
 
-import com.example.labor_management_project.model.SalaryRate;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Setter

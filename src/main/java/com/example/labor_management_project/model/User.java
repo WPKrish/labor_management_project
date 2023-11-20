@@ -38,8 +38,11 @@ public class User {
     private String name;
     private String password;
 
+    private boolean activeUser;
 
-    @JsonFormat(pattern="dd/MM/yy")
+
+
+    @JsonFormat(pattern="MM/dd/yy")
     private Date birthDay;
     private String phoneNo;
     private String address;

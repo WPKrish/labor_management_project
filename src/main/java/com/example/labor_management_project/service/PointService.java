@@ -1,8 +1,6 @@
 package com.example.labor_management_project.service;
 
-import com.example.labor_management_project.dto.AttendanceDTO;
 import com.example.labor_management_project.dto.PointDTO;
-import com.example.labor_management_project.model.Attendance;
 import com.example.labor_management_project.model.Point;
 import com.example.labor_management_project.model.User;
 import com.example.labor_management_project.repository.PointRepository;

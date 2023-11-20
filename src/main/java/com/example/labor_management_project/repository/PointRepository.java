@@ -1,7 +1,5 @@
 package com.example.labor_management_project.repository;
 
-
-import com.example.labor_management_project.dto.AttendanceDTO;
 import com.example.labor_management_project.dto.PointDTO;
 import com.example.labor_management_project.model.Point;
 import com.example.labor_management_project.model.User;

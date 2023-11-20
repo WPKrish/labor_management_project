@@ -18,6 +18,7 @@ public interface AttendanceRepository extends JpaRepository<Attendance, Integer>
     boolean existsByUserAndInTimeBetween(User user, LocalDateTime startTime, LocalDateTime endTime);
 
 
+
     // This is used for update Attendance outTime according to the date (used)
     @Query("SELECT new com.example.labor_management_project.dto.AttendanceDTO(u.employeeID, a.attID, a.inTime) " +
             "FROM User u " +

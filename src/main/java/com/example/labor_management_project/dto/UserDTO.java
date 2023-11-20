@@ -23,11 +23,10 @@ public class UserDTO {
     private String password;
 
     private String oldPassword;
-    @JsonFormat(pattern="dd/MM/yy")
+    @JsonFormat(pattern="mm/dd/yy")
     private Date birthDay;
     private String phoneNo;
     private String address;
-//    private String siteName;
     private String bloodGroup;
     private String emergencyPhoneNo;
     private String emergencyName;

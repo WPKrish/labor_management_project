@@ -16,10 +16,10 @@ public interface UserRepository extends JpaRepository<User, Integer> {
     @Query("select user from User user")
     List<User> findAllUsers();
 
-    @Query("select user from User user where jobRole.roleID = 2 OR jobRole.roleID=1" )
+    @Query("select user from User user where (jobRole.roleID = 2 OR jobRole.roleID=1) AND activeUser = true" )
     List<User> findAllSupervisors();
 
-    @Query("select user from User user where jobRole.roleID = 3" )
+    @Query("select user from User user where jobRole.roleID = 3 AND activeUser = true" )
     List<User> findAllLabors();
 
 
@@ -47,6 +47,7 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 
     Optional<User> findByUsername(String username);
     User findByEmployeeID(int employeeID);
+
 
 
 
