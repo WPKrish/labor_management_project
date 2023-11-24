@@ -22,7 +22,8 @@ public interface PointRepository extends JpaRepository<Point, Integer> {
             "FROM User u " +
             "JOIN Point p ON u.employeeID = p.user.employeeID " +
             "WHERE u.jobRole.roleID = 3 AND YEAR(p.pointGiveTime) = :year AND MONTH(p.pointGiveTime) = :month "  +
-            "GROUP BY u.employeeID, u.name")
+            "GROUP BY u.employeeID, u.name " +
+            "ORDER BY SUM(p.points) DESC")
     List<PointDTO> findAllLaborsPoints(@Param("year") int year, @Param("month") int month);
 
 }

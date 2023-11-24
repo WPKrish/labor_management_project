@@ -54,7 +54,6 @@ public class AttendanceService{
             else{
                 Attendance tempAttendance = new Attendance();
                 tempAttendance.setInTime(LocalDateTime.now());
-                //tempAttendance.setOutTime(LocalDateTime.now().with(LocalTime.MAX)); // set out Time as 00.00.00 and it can update finally
                 tempAttendance.setOutTime(LocalDateTime.now().plusHours(8)); // set out Time as inTime+8 and it can update finally
                 tempAttendance.setDailyJob(attendanceDTO.getDailyJob());
 
@@ -99,7 +98,6 @@ public class AttendanceService{
 
         availableAttendance.setAttID(availableAttendanceANo);
         availableAttendance.setInTime(LocalDateTime.now());
-        //availableAttendance.setOutTime(LocalDateTime.now());
         availableAttendance.setDailyJob(attendanceDTO.getDailyJob());
 
         //If use below code, it's value should be given as an input
@@ -108,12 +106,6 @@ public class AttendanceService{
         return "Success";
     }
 
-
-//    public String deleteAttendance(int attID) {
-//
-//        attendanceRepository.deleteById(attID);
-//        return "Success";
-//    }
 
     // Before delete user should be null, because employee_id is a foreign key for this (foreign key can't delete directly)
     public String deleteAttendance(int attID) {
@@ -193,7 +185,6 @@ public class AttendanceService{
         // Assuming you want to calculate working hours in floating-point format (hours)
         long seconds = Duration.between(inTime, outTime).getSeconds();
         float hours = seconds / 3600.0f; // Convert seconds to hours (1 hour = 3600 seconds)
-        //float hours = Math.round((seconds / 3600.0f) * 10.0f) / 10.0f; // Round to one decimal place
         float roundedHours = roundToNearestHalfDown(hours);
         return roundedHours;
     }

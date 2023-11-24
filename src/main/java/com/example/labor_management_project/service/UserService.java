@@ -4,7 +4,6 @@ import com.example.labor_management_project.dto.DailyJobDTO;
 import com.example.labor_management_project.dto.NamePasswordDTO;
 import com.example.labor_management_project.dto.UserDTO;
 import com.example.labor_management_project.exception.UserNotFoundException;
-import com.example.labor_management_project.model.Attendance;
 import com.example.labor_management_project.model.JobRole;
 import com.example.labor_management_project.model.User;
 import com.example.labor_management_project.repository.*;
@@ -25,7 +24,6 @@ public class UserService {
     @Autowired
     UserRepository userRepository;
 
-
     @Autowired
     JobRoleRepository jobRoleRepository;
 
@@ -45,15 +43,13 @@ public class UserService {
             User tempUser = new User();
             tempUser.setName(userDTO.getName());
             tempUser.setUsername(userDTO.getUsername());
-            //tempUser.setPassword(userDTO.getPassword()); //this is used to set password without security
             tempUser.setPassword(this.passwordEncoder.encode(userDTO.getPassword())); //this is used to set password with security
-//            tempUser.setPassword(this.passwordEncoder.encode("123")); //this is used to set password with security and without user working
             tempUser.setPhoneNo(userDTO.getPhoneNo());
             tempUser.setEmergencyName(userDTO.getEmergencyName());
             tempUser.setEmergencyPhoneNo(userDTO.getEmergencyPhoneNo());
             tempUser.setBirthDay(userDTO.getBirthDay());
             tempUser.setAddress(userDTO.getAddress());
-        tempUser.setSite(siteRepository.getReferenceById(userDTO.getSiteID()));
+            tempUser.setSite(siteRepository.getReferenceById(userDTO.getSiteID()));
             tempUser.setBloodGroup(userDTO.getBloodGroup());
             tempUser.setActiveUser(true); // newly added
             tempUser.setJobRole(jobRoleRepository.getReferenceById(userDTO.getRoleID()));
@@ -82,7 +78,6 @@ public class UserService {
         availableUser.setEmployeeID(availableUserEmpNo);
         availableUser.setUsername(userDTO.getUsername());
         availableUser.setName(userDTO.getName());
-        //availableUser.setPassword(userDTO.getPassword());
         availableUser.setPassword(this.passwordEncoder.encode(userDTO.getPassword())); //this is used to set password with security
         availableUser.setPhoneNo(userDTO.getPhoneNo());
         availableUser.setEmergencyName(userDTO.getEmergencyName());
@@ -109,9 +104,9 @@ public class UserService {
             throw new UserNotFoundException("Requested User not exist");
         }
 
-        String oldPassword = userDTO.getOldPassword();
-        String currentPassword = checkEmployee.get().getPassword();
-        if(passwordEncoder.matches(oldPassword, currentPassword)){
+        String oldPasswordInputByUser = userDTO.getOldPassword();
+        String oldPasswordInSystem = checkEmployee.get().getPassword();
+        if(passwordEncoder.matches(oldPasswordInputByUser, oldPasswordInSystem)){
             // Now you can safely retrieve the attendance
             User availableUser = checkEmployee.get();
             int availableUserEmpNo = availableUser.getEmployeeID();
@@ -126,7 +121,7 @@ public class UserService {
     }
 
     // delete user
-    public ResponseEntity<String> deleteUser(int employeeID) {
+    public ResponseEntity<String> inActivateUser(int employeeID) {
         User user = userRepository.findById(employeeID).orElse(null);
 
         if (user != null && user.isActiveUser()==true) {

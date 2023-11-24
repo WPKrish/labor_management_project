@@ -16,7 +16,6 @@ public class SalaryRateController {
     }
 
     // Read Specific Salary Rate Details from DB
-    // @GetMapping("/getSalaryRate/{rateID}")
     @GetMapping("{rateID}")
     public SalaryRate getSalaryRate(@PathVariable("rateID") int rateID){
         return salaryRateService.getSalaryRate(rateID);

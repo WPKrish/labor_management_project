@@ -22,4 +22,5 @@ public class JobRole {
     String role;
 
 
+
 }

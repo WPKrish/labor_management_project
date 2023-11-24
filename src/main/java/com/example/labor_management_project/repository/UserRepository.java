@@ -37,16 +37,13 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 
 
 
-//    // Create Login Repository
-//        Optional<User> findOneByEmployeeIDAndPassword(int employeeID, String password);
-//        User findByEmployeeID(int employeeID);
 
     // Create Login Repository
     Optional<User> findOneByUsernameAndPassword(String username, String password);
-//    User findByUsername(String username);
-
     Optional<User> findByUsername(String username);
     User findByEmployeeID(int employeeID);
+
+
 
 
 

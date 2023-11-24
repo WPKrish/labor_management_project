@@ -17,20 +17,17 @@ public class UserDTO {
     int employeeID;
     int rateID;
     int roleID;
-
     int siteID;
     private String name;
     private String password;
-
     private String oldPassword;
-    @JsonFormat(pattern="mm/dd/yy")
+    @JsonFormat(pattern="MM/dd/yyyy")
     private Date birthDay;
     private String phoneNo;
     private String address;
     private String bloodGroup;
     private String emergencyPhoneNo;
     private String emergencyName;
-
     private String username;
 
 }

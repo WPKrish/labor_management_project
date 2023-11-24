@@ -81,11 +81,11 @@ public interface AttendanceRepository extends JpaRepository<Attendance, Integer>
 
 
     // All Labors Salary According to the month (used)
-    @Query("SELECT new com.example.labor_management_project.dto.AttendanceDTO(u.employeeID, u.name, MONTHNAME(MAX(a.inTime)), YEAR(MAX(a.inTime)), SUM(a.workingHours) as totalWorkingHours, COUNT(a.attID) as totalWorkingDays, SUM(a.workingHours) / 8, u.salaryRate.salaryPerDay, (SUM(a.workingHours) / 8) * u.salaryRate.salaryPerDay) " +
+    @Query("SELECT new com.example.labor_management_project.dto.AttendanceDTO(u.employeeID, u.name, MONTHNAME(MAX(a.inTime)), YEAR(MAX(a.inTime)), SUM(a.workingHours) as totalWorkingHours, COUNT(a.attID) as totalWorkingDays, SUM(a.workingHours) / 8, u.salaryRate.salaryPerDay, (SUM(a.workingHours) / 8) * u.salaryRate.salaryPerDay) as TotalSalary " +
             "FROM User u " +
             "JOIN Attendance a ON u.employeeID = a.user.employeeID " +
             "WHERE u.jobRole.roleID = 3 AND YEAR(a.inTime) = :year AND MONTH(a.inTime) = :month "  +
-            "GROUP BY u.employeeID, u.name")
+            "GROUP BY u.employeeID, u.name ")
     List<AttendanceDTO> findAllLaborsMonthSalary(@Param("year") int year,  @Param("month") int month);
 
 

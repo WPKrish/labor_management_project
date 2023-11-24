@@ -8,7 +8,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.Date;
-import java.util.List;
 
 @Getter
 @Setter
@@ -37,21 +36,14 @@ public class User {
 
     private String name;
     private String password;
-
     private boolean activeUser;
-
-
-
-    @JsonFormat(pattern="MM/dd/yy")
+    @JsonFormat(pattern="MM/dd/yyyy")
     private Date birthDay;
     private String phoneNo;
     private String address;
-//    @Column(name="site_name")
-//    private String siteName;
     private String bloodGroup;
     private String emergencyPhoneNo;
     private String emergencyName;
-
     private String username;
 
 

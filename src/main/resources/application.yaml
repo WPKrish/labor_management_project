@@ -6,3 +6,4 @@ spring:
 
 # JPA Setting
   jpa.hibernate.ddl_auto: update
+

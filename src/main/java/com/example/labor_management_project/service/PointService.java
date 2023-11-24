@@ -35,22 +35,7 @@ public class PointService {
             return new ResponseEntity<>("Requested User not exist", HttpStatus.NOT_FOUND);
         }
 
-
         else{
-
-//            // Check if an attendance record already exists for the employee on the current day (this if else condition was not used, because employer can give points in same day also)
-//            if (pointRecordExists(pointDTO.getEmployeeID())) {
-//                return new ResponseEntity<>("This Point was Marked already", HttpStatus.CONFLICT);
-//            }
-//            else{
-//                Point points = new Point();
-//                points.setPointGiveTime(LocalDateTime.now());
-//                points.setPoints(pointDTO.getPoints());
-//                points.setUser(userRepository.getReferenceById(pointDTO.getEmployeeID()));
-//                pointRepository.save(points);
-//                return new ResponseEntity<>("Point Mark successfully", HttpStatus.OK);
-//            }
-
             Point points = new Point();
             points.setPointGiveTime(LocalDateTime.now());
             points.setPoints(pointDTO.getPoints());
@@ -59,18 +44,6 @@ public class PointService {
             return new ResponseEntity<>("Point Mark successfully", HttpStatus.OK);
         }
 
-    }
-    // Helper method to check if an attendance record already exists for the employee on the current day (this method was not used, because employer can give points in same day also)
-    private boolean pointRecordExists(int employeeID) {
-        LocalDateTime startOfDay = LocalDateTime.now().with(LocalTime.MIDNIGHT);
-        LocalDateTime endOfDay = LocalDateTime.now().with(LocalTime.MAX);
-
-        // Check if an attendance record exists for the employee and within the current day's time range
-        return pointRepository.existsByUserAndPointGiveTimeBetween(
-                userRepository.getReferenceById(employeeID),
-                startOfDay,
-                endOfDay
-        );
     }
 
     // Get Points
